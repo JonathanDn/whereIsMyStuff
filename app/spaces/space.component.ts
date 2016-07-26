@@ -43,8 +43,6 @@ export class SpaceComponent implements OnInit {
        this.space = space;
      });
    });
-
-   // get selected space
   }
 
 
