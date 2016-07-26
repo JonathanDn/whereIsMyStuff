@@ -1,0 +1,52 @@
+/*$bgColor : lightblue;*/
+
+section {
+ margin-top: 100px;
+
+}
+
+
+/*li {
+  list-style: none;
+  display:inline-block;
+  height: 15%;
+  width:  90%;
+  background-color:#e6eef1;
+  border-radius: 0.2em;
+  text-align: center;
+  font-size: 1em;
+  color:darkblue;
+}*/
+
+
+/*.imgMonster {
+  max-width: 100px;
+}*/
+
+.addSpaceBtn {
+  margin-top: 1vw;
+}
+
+.primarySpaceContainer {
+  border: 1px solid green;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.spacesSideBar {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  height: 70vh;
+}
+.spaceCardContainer {
+  display: flex;
+  flex-direction: column;
+  /*justify-content: space-around;*/
+}
+
+/*.spaceCard {
+
+}*/
