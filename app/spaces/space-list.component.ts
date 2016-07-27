@@ -21,12 +21,12 @@ import {SpaceComponent} from './space.component';
         <div class="spacesSideBar">
             
             <div class="spaceCardContainer">
-              <div class="spaceCard btn btn-primary" *ngFor="let space of spaces" (click)="onSelect(space)" >
-                  <div> {{space.name}}</div>
+              <div class="spaceCard btn btn-primary" *ngFor="let store of stores" (click)="onSelect(space)" >
+                  <div> {{store.name}}</div>
               </div>
             </div>
 
-          <a routerLink="/space/edit" class="addSpaceBtn btn btn-primary">+ Add Space</a>
+          <a routerLink="/space/edit" class="addSpaceBtn btn btn-primary">+ Add Store</a>
         </div>
 
         <div class="storesPrimaryContainer">
@@ -44,25 +44,30 @@ import {SpaceComponent} from './space.component';
 export class SpaceListComponent implements OnInit {
   // TODO: let the pipe setup the initial filter
   private filter = {byName: '', byPower: ''};
-  private spaces: any;
+  private space: any;
+  private stores: any;
   private selectedSpace : SpaceModel;
 
   constructor(private toastr : ToastsManager, private spaceService : SpaceService) { }
 
   ngOnInit() {
-    const prmSpaces = this.spaceService.query();
-    // console.log('prmSpaces', prmSpaces);
-    // console.log('this.spaces', this.spaces);
+    const prmSpace = this.spaceService.query();
+    // let a = prmSpace[0];
+    console.log('prmSpace', prmSpace);
+    // console.log('this.space', this.spaces);
     
-    // this.spaces = this.spaceService.query();
-    prmSpaces.then((spaces : SpaceModel[]) => {
+    // this.space = this.spaceService.query();
+    prmSpace.then((space : SpaceModel) => {
       // console.log('spaces promise resolved:', spaces);
-      this.spaces = spaces;
-      // console.log('spaces', spaces[0]);
-      // this.spaces = this.spaceService.spaces;
+      // this.space = space.stores;
+      console.log('space', space);
+      
+      
+      // console.log('space', space[0]);
+      this.stores = space.stores;
     });
 
-    prmSpaces.catch(err => {
+    prmSpace.catch(err => {
       alert('Sorry,cannot load the spaces, try again later');
       console.log('Cought an error in SpaceList', err);
     });
@@ -71,8 +76,8 @@ export class SpaceListComponent implements OnInit {
   }
   removeSpace(spaceId : string) {
     this.spaceService.remove(spaceId)
-      .then((spaces : SpaceModel[])=>{
-        this.spaces = spaces;
+      .then((space : SpaceModel[])=>{
+        this.space = space;
         this.toastr.success('You are awesome!', 'Success!');
       });
   }

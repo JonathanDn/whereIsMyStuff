@@ -22,7 +22,7 @@ export class SpaceEditComponent implements OnInit {
     private spaceService: SpaceService) { }
 
   ngOnInit() {
-    console.log('this.route.params', this.route.params);
+    // console.log('this.route.params', this.route.params);
     this.prepareForm();
     this.route.params.subscribe(params => {
         const id = params['id'];
@@ -33,16 +33,19 @@ export class SpaceEditComponent implements OnInit {
 
                 this.spaceToEdit = space;
                 console.log('in edit, ajax returned : ',  this.spaceToEdit,  this.frmSpace.controls );
-                (<FormControl>this.frmSpace.controls['name']).updateValue(space.name);
-                // (<FormControl>this.frmSpace.controls['power']).updateValue(space.power);
+                (<FormControl>this.frmSpace.controls['name']).updateValue(space.name);          
             });
-        }
+        } 
+        // else {
+        //   this.spaceToEdit = new SpaceModel();
+        // }
       });
   }
   save() {
     const spaceId = (this.spaceToEdit)?  this.spaceToEdit.id : undefined;
     console.log('this.frmSpace.value', this.frmSpace.value);
-    console.log('spaceId:', spaceId);
+    // this.frmSpace.spaces = []
+    // console.log('spaceId:', spaceId);
     
     // console.log('here');
 

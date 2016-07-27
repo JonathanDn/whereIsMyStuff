@@ -1,6 +1,6 @@
 export class SpaceModel {
 
-  constructor(private _id: string, public name: string, public stores: any[]) {}
+  constructor(private _id: string = undefined, public name: string = '', public stores: any[] = []) {}
 
   get id() {
     return this._id;
