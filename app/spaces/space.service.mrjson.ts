@@ -18,7 +18,7 @@ export class SpaceService {
       .then(res => {
         const jsonSpaces = res.json();
         return jsonSpaces.map((jsonSpace : SpaceModel) =>
-          new SpaceModel(jsonSpace.name, jsonSpace.spaces))
+          new SpaceModel(jsonSpace.id, jsonSpace.name, jsonSpace.stores))
       });
 
     prmSpaces.catch(err => {
@@ -34,7 +34,7 @@ export class SpaceService {
       .toPromise()
       .then(res => {
         const jsonSpace = res.json();
-        return new SpaceModel(jsonSpace.name, jsonSpace.power, jsonSpace.id);
+        return new SpaceModel(jsonSpace.id, jsonSpace.name, jsonSpace.stores);
       });
 
     prmSpace.catch(err => {
@@ -75,7 +75,7 @@ export class SpaceService {
     prmSpace = response.toPromise()
       .then((res : any) => {
           const jsonSpace = res.json();
-          return new SpaceModel(jsonSpace.name, jsonSpace.power, jsonSpace.id);
+          return new SpaceModel(jsonSpace.id, jsonSpace.name, jsonSpace.stores);
       });
 
     prmSpace.catch(err => {
