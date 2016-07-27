@@ -13,12 +13,12 @@ import {StoreThumbComponent} from './store-thumb.component'
   directives: [StoreThumbComponent],
   template: `
     <section *ngIf="space">
-      <h2>Space {{space.name}}</h2>
+      <!--<h2>Space {{space.name}}</h2>-->
       <store-thumb [stores]="space.stores"></store-thumb>
       <!--<img [src]="space.getImgUrl()" >-->
-      <pre>
+      <!--<pre>
           {{space | json}}
-        </pre>
+        </pre>-->
 
     </section>
   `

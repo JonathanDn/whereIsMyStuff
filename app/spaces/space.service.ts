@@ -32,26 +32,26 @@ export class SpaceService {
     return this.space;
   }
 
-  // query brings a nice regular spaces array.
+  // query brings a nice regular space object.
   query(): Promise<SpaceModel[]> {
 
-    let prmSpaces = this.http.get(this.baseUrl)
+    let prmSpace = this.http.get(this.baseUrl)
       .toPromise()
       .then((res : any) => {
         // console.log('res is :', res);
         
         const jsonSpace = res.json();
-        const regularSpaces = jsonSpace.map((jsonSpace : any) =>
-          new SpaceModel(jsonSpace._id, jsonSpace.name, jsonSpace.spaces));
-          // console.log('regularSpaces:', regularSpaces);
-        return regularSpaces
+        const regularSpace = jsonSpace.map((jsonSpace : any) =>
+          new SpaceModel(jsonSpace._id, jsonSpace.name, jsonSpace.stores));
+          // console.log('regularSpace:', regularSpace);
+        return regularSpace
       });
 
-    prmSpaces.catch(err => {
+    prmSpace.catch(err => {
       console.log('SpaceService::query - Problem talking to server');
     });
 
-    return prmSpaces;
+    return prmSpace;
   }
 
   
@@ -71,14 +71,14 @@ export class SpaceService {
   }
 
   // save - Adds (POST) or update (PUT)  
-  save(spaceData: any, id?: string) : Promise<SpaceModel>{
+  save(storeData: any, id?: string) : Promise<SpaceModel>{
     // console.log('spaceData', spaceData);
         this.space =  this.query();
-    console.log('spaces from DB', this.space);
+    console.log('space from DB', this.space);
     let response : any;
     let prmSpace : Promise<SpaceModel>;
-    // push the new ROOM to the spaces array within the HOUSE object.
-    let house = this.space.spaces.push(spaceData);
+    // push the new ROOM to the space object
+    let house = this.space.stores.push(storeData);
     console.log('house with new room: ', house);
     
     if (id) {
@@ -96,10 +96,10 @@ export class SpaceService {
           const jsonSpace = res.json();
           // console.log('jsonSpace', jsonSpace);
           // update the client space array.
-          // this.spaces.push(jsonSpace);
-          console.log('this.spaces with new space object:', this.space);
+          // this.stores.push(jsonSpace);
+          console.log('this.stores with new space object:', this.space);
           
-          return new SpaceModel(jsonSpace._id, jsonSpace.name, jsonSpace.spaces);
+          return new SpaceModel(jsonSpace._id, jsonSpace.name, jsonSpace.stores);
       });
 
     prmSpace.catch(err => {

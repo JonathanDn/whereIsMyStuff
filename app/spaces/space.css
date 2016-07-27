@@ -45,8 +45,26 @@ section {
   display: flex;
   flex-direction: column;
   /*justify-content: space-around;*/
+  
 }
 
-/*.spaceCard {
+.storesPrimaryContainer {
+  display: flex;
+  border: 1px solid pink;
+}
 
-}*/
+.storeContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  border: 2px solid blue;
+  width: 50vw;
+  height: 50vh;
+}
+.store {
+  border: 1px solid black;
+  width: 6vw;
+  height: 12vh;
+}

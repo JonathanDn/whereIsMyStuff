@@ -29,7 +29,7 @@ import {SpaceComponent} from './space.component';
           <a routerLink="/space/edit" class="addSpaceBtn btn btn-primary">+ Add Space</a>
         </div>
 
-        <div>
+        <div class="storesPrimaryContainer">
           <space-details>The Full Space Details</space-details>
         </div>
         

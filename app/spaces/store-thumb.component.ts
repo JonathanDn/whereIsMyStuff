@@ -9,10 +9,10 @@ import {SpaceService} from './space.service'
   styleUrls: [`space.css`],
   template: `
           <section>
-            <p>{{space.name}}</p>
-            <ul>
-              <li *ngFor="let store of stores ">{{store.name}}</li>
-            </ul>
+            <!--<p>{{space.name}}</p>-->
+            <div class="storeContainer">
+              <div class="store" *ngFor="let store of stores ">{{store.name}}</div>
+            </div>
             <!--<a routerLink="/space/{{space.id}}/{{space.name}}">-->
               <!--<img class="imgSpace" [src]="space.getImgUrl()" />-->
             <!--</a>-->
