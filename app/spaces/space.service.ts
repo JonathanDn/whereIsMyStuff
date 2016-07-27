@@ -18,14 +18,18 @@ export class SpaceService {
       .toPromise()
       .then(res => {
         const jsonSpace = res.json();
-        return new SpaceModel(jsonSpace._id, jsonSpace.name, jsonSpace.stores);
+        this.space = new SpaceModel(jsonSpace._id, jsonSpace.name, jsonSpace.stores);
+        return this.space;
       });
 
     prmSpace.catch(err => {
       console.log('SpaceService::get - Problem talking to server');
     });
     return prmSpace;
+  }
 
+  getSpace() {
+    return this.space;
   }
 
   // query brings a nice regular spaces array.
