@@ -16,7 +16,7 @@ import {SpaceModel} from './space.model';
     <section class="listContainer">
       <h2>List</h2>
       <div class="spaceCard btn btn-primary" *ngFor="let store of stores" (click)="onSelect(space)" >
-          <div> {{store.name}}</div>
+          <a  routerLink="/{{store.name}}">{{store.name}}</a>
       </div>
       <!--<div class="primarySpaceContainer">
 

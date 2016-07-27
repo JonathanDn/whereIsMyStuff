@@ -52,7 +52,7 @@ export class SpaceEditComponent implements OnInit {
     // succefuly saving to spaces array in DB
     this.spaceService.save(this.frmSpace.value, spaceId)
       .then(()=>{
-          this.router.navigate(['/space']);
+          this.router.navigate(['']);
       });
 
   }

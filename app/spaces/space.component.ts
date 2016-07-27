@@ -22,14 +22,13 @@ import {StoreDiagramComponent} from './store-diagram.component'
               <store-list>the list Should render here</store-list>
             </div>
 
-          <a routerLink="/space/edit" class="addSpaceBtn btn btn-primary">+ Add Store</a>
+          <a routerLink="/edit" class="addSpaceBtn btn btn-primary">+ Add Store</a>
         </div>
 
         <div class="storesPrimaryContainer">
           <!--<space-details>The Full Space Details</space-details>-->
           <store-diagram [stores]="space.stores">The diagram should render here</store-diagram>
         </div>
-        
 
       </div>
       <!--<pre>
