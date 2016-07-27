@@ -15,7 +15,6 @@ import {StoreThumbComponent} from './store-thumb.component'
     <section *ngIf="space">
       <!--<h2>Space {{space.name}}</h2>-->
       <store-thumb [stores]="space.stores"></store-thumb>
-      <!--<img [src]="space.getImgUrl()" >-->
       <!--<pre>
           {{space | json}}
         </pre>-->

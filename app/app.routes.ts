@@ -10,9 +10,9 @@ const routes: RouterConfig = [
   { path: '', component: SpaceComponent },
   { path: 'space', component: SpaceListComponent },
   { path: 'space/edit', component: SpaceEditComponent },
-  { path: 'space/edit/:id', component: SpaceEditComponent },
-  { path: 'space/:id/:name', component: SpaceComponent },
-  { path: 'chat', component: ChatRoomComponent }
+  { path: 'space/edit/:id', component: SpaceEditComponent }
+  // { path: 'space/:id/:name', component: SpaceComponent },
+  // { path: 'chat', component: ChatRoomComponent }
 
 ];
 

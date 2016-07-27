@@ -57,7 +57,7 @@ export class SpaceService {
   
 
   // DELETE 
-  remove(id: string) : Promise<SpaceModel[]> {
+  remove(id: string) : Promise<SpaceModel> {
     let prmSpace = this.http.delete(this.baseUrl + id)
       .toPromise()
       .then(res => {

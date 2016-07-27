@@ -22,13 +22,13 @@ import {SpaceComponent} from './space.component';
             
             <div class="spaceCardContainer">
               <div class="spaceCard btn btn-primary" *ngFor="let store of stores" (click)="onSelect(space)" >
-                  <div> {{store.name}}</div>
+                  <div> {{space.name}}</div>
               </div>
             </div>
 
           <a routerLink="/space/edit" class="addSpaceBtn btn btn-primary">+ Add Store</a>
         </div>
-
+        <!--space component renders here:-->
         <div class="storesPrimaryContainer">
           <space-details>The Full Space Details</space-details>
         </div>
