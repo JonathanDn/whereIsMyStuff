@@ -22,7 +22,7 @@ import {SpaceComponent} from './space.component';
             
             <div class="spaceCardContainer">
               <div class="spaceCard btn btn-primary" *ngFor="let store of stores" (click)="onSelect(space)" >
-                  <div> {{space.name}}</div>
+                  <div> {{store.name}}</div>
               </div>
             </div>
 
@@ -76,7 +76,7 @@ export class SpaceListComponent implements OnInit {
   }
   removeSpace(spaceId : string) {
     this.spaceService.remove(spaceId)
-      .then((space : SpaceModel[])=>{
+      .then((space : SpaceModel)=>{
         this.space = space;
         this.toastr.success('You are awesome!', 'Success!');
       });
