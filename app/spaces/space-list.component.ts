@@ -51,12 +51,12 @@ export class SpaceListComponent implements OnInit {
 
   ngOnInit() {
     const prmSpaces = this.spaceService.query();
-    console.log('prmSpaces', prmSpaces);
-    console.log('this.spaces', this.spaces);
+    // console.log('prmSpaces', prmSpaces);
+    // console.log('this.spaces', this.spaces);
     
     // this.spaces = this.spaceService.query();
     prmSpaces.then((spaces : SpaceModel[]) => {
-      console.log('spaces promise resolved:', spaces);
+      // console.log('spaces promise resolved:', spaces);
       this.spaces = spaces;
       // console.log('spaces', spaces[0]);
       // this.spaces = this.spaceService.spaces;
@@ -78,7 +78,7 @@ export class SpaceListComponent implements OnInit {
   }
 
   onSelect(space){
-    console.log('space here')
+    // console.log('space here')
     this.selectedSpace = space;
     // console.log('this.selectedSpace.name', this.selectedSpace.name);
 

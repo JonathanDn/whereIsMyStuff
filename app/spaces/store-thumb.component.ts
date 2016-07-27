@@ -30,7 +30,7 @@ export class StoreThumbComponent implements OnInit {
     // console.log('this.space in store:', this.space);
     
     this.stores = this.space.stores
-    console.log('this.stores ', this.stores );
+    // console.log('this.stores ', this.stores );
     
   }
 

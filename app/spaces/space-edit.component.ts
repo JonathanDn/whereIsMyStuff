@@ -41,7 +41,10 @@ export class SpaceEditComponent implements OnInit {
   }
   save() {
     const spaceId = (this.spaceToEdit)?  this.spaceToEdit.id : undefined;
-    // console.log('this.frmSpace.value', this.frmSpace.value);
+    console.log('this.frmSpace.value', this.frmSpace.value);
+    console.log('spaceId:', spaceId);
+    
+    // console.log('here');
 
     // succefuly saving to spaces array in DB
     this.spaceService.save(this.frmSpace.value, spaceId)

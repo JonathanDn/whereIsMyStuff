@@ -72,24 +72,28 @@ export class SpaceService {
 
   // save - Adds (POST) or update (PUT)  
   save(storeData: any, id?: string) : Promise<SpaceModel>{
-    // console.log('spaceData', spaceData);
-        this.space =  this.query();
-    console.log('space from DB', this.space);
+    console.log('spaceData', storeData);
     let response : any;
     let prmSpace : Promise<SpaceModel>;
     // push the new ROOM to the space object
+    console.log('this.space', this.space);
+    
     let house = this.space.stores.push(storeData);
     console.log('house with new room: ', house);
-    
-    if (id) {
-      const url = this.baseUrl + id;
-      response = this.http.put(url, house)
-    } else {
-      // succefully saves NEW ROOM to database.
-	    const url = this.baseUrl;
-      response = this.http.post(url, house)
-      // console.log('response from url:', response);
-    }
+    console.log('house id:', id)
+
+    const url = this.baseUrl + this.space._id;
+    response = this.http.put(url, this.space)
+
+    // if (id) {
+    //   const url = this.baseUrl + id;
+    //   response = this.http.put(url, house)
+    // } else {
+    //   // succefully saves NEW ROOM to database.
+	  //   const url = this.baseUrl;
+    //   response = this.http.post(url, house)
+    //   // console.log('response from url:', response);
+    // }
 
     prmSpace = response.toPromise()
       .then((res : any) => {
@@ -97,7 +101,7 @@ export class SpaceService {
           // console.log('jsonSpace', jsonSpace);
           // update the client space array.
           // this.stores.push(jsonSpace);
-          console.log('this.stores with new space object:', this.space);
+          console.log('this.stores with new store in space:', this.space);
           
           return new SpaceModel(jsonSpace._id, jsonSpace.name, jsonSpace.stores);
       });
