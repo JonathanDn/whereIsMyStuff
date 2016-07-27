@@ -1,6 +1,6 @@
 /*$bgColor : lightblue;*/
 
-section {
+.mainViewSection {
  margin-top: 100px;
 
 }
@@ -69,4 +69,10 @@ section {
   border: 1px solid black;
   width: 100px;
   height: 100px;
+}
+
+.listContainer {
+  border: 3px solid yellow;
+  display: flex;
+  flex-direction: column;
 }

@@ -3,45 +3,47 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import {SpaceService} from './space.service';
 import {SpaceModel} from './space.model';
-import {SpaceComponent} from './space.component';
+// import {SpaceComponent} from './space.component';
 
 
 @Component({
   moduleId: module.id,
   styleUrls: [`space.css`],
   pipes: [],
-  directives: [SpaceComponent],
-  // selector: 'space-list',
+  directives: [],
+  selector: 'store-list',
   template: `
-    <section>
-      <h2>Spaces</h2>
-
-      <div class="primarySpaceContainer">
+    <section class="listContainer">
+      <h2>List</h2>
+      <div class="spaceCard btn btn-primary" *ngFor="let store of stores" (click)="onSelect(space)" >
+          <div> {{store.name}}</div>
+      </div>
+      <!--<div class="primarySpaceContainer">
 
         <div class="spacesSideBar">
             
             <div class="spaceCardContainer">
               <div class="spaceCard btn btn-primary" *ngFor="let store of stores" (click)="onSelect(space)" >
-                  <div> {{store.name}}</div>
+                  <div> List{{store.name}}</div>
               </div>
             </div>
 
           <a routerLink="/space/edit" class="addSpaceBtn btn btn-primary">+ Add Store</a>
-        </div>
+        </div>-->
         <!--space component renders here:-->
-        <div class="storesPrimaryContainer">
+        <!--<div class="storesPrimaryContainer">
           <space-details>The Full Space Details</space-details>
         </div>
         
 
-      </div>
+      </div>-->
 
     </section>
 
 
   `
 })
-export class SpaceListComponent implements OnInit {
+export class StoreListComponent implements OnInit {
   // TODO: let the pipe setup the initial filter
   private filter = {byName: '', byPower: ''};
   private space: any;

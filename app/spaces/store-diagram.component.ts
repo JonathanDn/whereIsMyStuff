@@ -5,10 +5,11 @@ import {SpaceService} from './space.service'
 
 @Component({
   moduleId: module.id,
-  selector: 'store-thumb',
+  selector: 'store-diagram',
   styleUrls: [`space.css`],
   template: `
           <section>
+            <h2>Diagram</h2>
             <div class="storeContainer">
               <div class="store" *ngFor="let store of stores ">{{store.name}}</div>
             </div>
@@ -18,7 +19,7 @@ import {SpaceService} from './space.service'
           `
 
 })
-export class StoreThumbComponent implements OnInit {
+export class StoreDiagramComponent implements OnInit {
 
   private stores : SpaceModel;
   private space: any;
