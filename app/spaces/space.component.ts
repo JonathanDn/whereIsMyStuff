@@ -23,7 +23,8 @@ import {StoreDiagramComponent} from './store-diagram.component'
               <store-list [stores]="space.stores" (selected)="setStore($event)"  >the list Should render here</store-list>
             </div>
 
-          <a routerLink="/edit" class="addSpaceBtn btn btn-primary">+ Add {{storeTypeToAdd}}</a>
+          <!--<a routerLink="/edit" class="addSpaceBtn btn btn-primary">+ Add {{storeTypeToAdd}}</a>-->
+          <div (click)="renderStoreType()" class="addSpaceBtn btn btn-primary">+ Add {{storeTypeToAdd}}</div>
         </div>
 
         <div class="storesPrimaryContainer">
@@ -43,7 +44,7 @@ export class SpaceComponent implements OnInit {
 
 // Input()
   private space : SpaceModel;
-  private storeTypeToAdd = 'Room';
+  private storeTypeToAdd;
   // private furnitures: any; 
   constructor(
                 private route: ActivatedRoute, private router: Router,
@@ -58,7 +59,8 @@ export class SpaceComponent implements OnInit {
    
   // let storeName = this.router.routerState.snapshot.queryParams["store"];
   // console.log('Store Name is ', storeName);
-    
+    this.storeTypeToAdd = this.spaceService.getStoreType();
+
     this.space = this.spaceService.getCurrStore();
 
      if (!this.space) {
@@ -73,12 +75,26 @@ export class SpaceComponent implements OnInit {
      
   }
   setStore(store) {
-    // console.log('store', store);
-
+    console.log('setStoring!!!');
+    
+    // console.log('spaceComponent: store', store);
+    
     // if this func is on, render the furnitures not rooms.
     this.space =  this.spaceService.setCurrStore(store)
     // change button name to add furnitures
+      this.storeTypeToAdd = "Storage";
+    // this.storeTypeToAdd = this.spaceService.getStoreType();
 
-    this.storeTypeToAdd = "Storage";
+  }
+  renderStoreType() {
+    console.log('Clicked');
+    // this.storeTypeToAdd = "Room"
+    console.log('renderStoreType: this.storeTypeToAdd', this.storeTypeToAdd);
+    this.storeTypeToAdd = this.spaceService.setStoreType();
+    console.log('renderStoreType: this.storeTypeToAdd', this.storeTypeToAdd);
+
+    this.router.navigate(['/edit']);
+    
+    
   }
 }

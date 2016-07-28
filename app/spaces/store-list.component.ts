@@ -37,9 +37,9 @@ export class StoreListComponent implements OnInit {
   private stores: any;
   // private selectedSpace : SpaceModel;
   public selected = new EventEmitter();
-  private listName = 'Rooms';
+  private listName = this.spaceService.getStoreType();
 
-  constructor(private toastr : ToastsManager) { }
+  constructor(private toastr : ToastsManager,  private spaceService: SpaceService) {}
 
   ngOnInit() {
   }

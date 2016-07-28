@@ -10,9 +10,18 @@ export class SpaceService {
   private baseUrl = 'http://localhost:3003/data/space/';
   private space: any;
   private currStore: any;
+
+  private storeTypeToAdd = "Rooms";
   constructor(private http: Http) {   }
 
+getStoreType() {
+  return this.storeTypeToAdd;
+}
 
+setStoreType() {
+  this.storeTypeToAdd = "Storages";
+  return this.storeTypeToAdd;
+}
 
 getCurrStore() {
   return this.currStore;
