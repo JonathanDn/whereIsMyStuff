@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {SpaceService} from './space.service';
 import {SpaceModel} from './space.model';
@@ -19,7 +19,7 @@ import {StoreDiagramComponent} from './store-diagram.component'
         <div class="spacesSideBar">
             
             <div class="spaceCardContainer">
-              <store-list>the list Should render here</store-list>
+              <store-list [stores]="space.stores" (selected)="setStore($event)"  >the list Should render here</store-list>
             </div>
 
           <a routerLink="/edit" class="addSpaceBtn btn btn-primary">+ Add Store</a>
@@ -27,7 +27,7 @@ import {StoreDiagramComponent} from './store-diagram.component'
 
         <div class="storesPrimaryContainer">
           <!--<space-details>The Full Space Details</space-details>-->
-          <store-diagram [stores]="space.stores">The diagram should render here</store-diagram>
+          <!--<store-diagram [selected]="showSelectedRoom()">The diagram should render here</store-diagram>-->
         </div>
 
       </div>
@@ -42,24 +42,36 @@ export class SpaceComponent implements OnInit {
 
 // Input()
   private space : SpaceModel;
-
+  // private furnitures: any; 
   constructor(
                 private route: ActivatedRoute,
                 private spaceService : SpaceService
-  ) { }
+  ) { 
+
+
+
+  }
 
   ngOnInit() {
+   
    this.route.params.subscribe(params => {
-    //  console.log('Params are: ', params);
+     console.log('Params are: ', params);
     //  const id = params['id'];
      const id = '5797787f2ecc9326143177f0';
      const prmSpace = this.spaceService.get(id);
      prmSpace.then((space: SpaceModel) => {
+       
        this.space = space;
+
+
      });
    });
   }
+  setStore(store) {
+    // console.log('store', store);
 
-
+    // if this func is on, render the furnitures not rooms.
+    this.space =  store;
+  }
 
 }

@@ -10,7 +10,8 @@ import { RouterConfig, ROUTER_DIRECTIVES, provideRouter } from '@angular/router'
 
 const routes: RouterConfig = [
   { path: '', component: SpaceComponent },
-  { path: ':store.name', component: SpaceComponent },
+  // { path: ':storeName', component: SpaceComponent },
+  // { path: ':store.name', component: SpaceComponent },
   
   // { path: 'space', component: StoreListComponent },
   { path: 'edit', component: SpaceEditComponent },

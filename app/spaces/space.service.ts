@@ -40,7 +40,8 @@ export class SpaceService {
       .then((res : any) => {
         // console.log('res is :', res);      
         const jsonSpace = res.json();
-        console.log('jsonSpace from server:', jsonSpace);       
+        // console.log('jsonSpace from server:', jsonSpace);       
+
         // const regularSpace = jsonSpace.map((jsonSpace : any) =>
         //   new SpaceModel(jsonSpace._id, jsonSpace.name, jsonSpace.stores));
           // console.log('regularSpace:', regularSpace);
@@ -72,14 +73,14 @@ export class SpaceService {
 
   // save - Adds (POST) or update (PUT)  
   save(storeData: any, id?: string) : Promise<SpaceModel>{
-    console.log('storeData before', storeData);
+    // console.log('storeData before', storeData);
     // add property stores array
     storeData.stores = [];
-    console.log('storeData after', storeData);    
+    // console.log('storeData after', storeData);    
     let response : any;
     let prmSpace : Promise<SpaceModel>;
     // push the new ROOM to the space object
-    console.log('this.space', this.space);
+    // console.log('this.space', this.space);
     
     let house = this.space.stores.push(storeData);
     // console.log('house with new room: ', house);
