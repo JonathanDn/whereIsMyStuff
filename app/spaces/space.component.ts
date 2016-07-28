@@ -18,7 +18,7 @@ import {StoreDiagramComponent} from './store-diagram.component'
       <h2>Space {{space.name}}</h2>
       <div class="primarySpaceContainer">
         <div class="spacesSideBar">
-            
+            <h2>{{storeTypeToAdd}}s</h2>
             <div class="spaceCardContainer">
               <store-list [stores]="space.stores" (selected)="setStore($event)"  >the list Should render here</store-list>
             </div>

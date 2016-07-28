@@ -11,7 +11,7 @@ export class SpaceService {
   private space: any;
   private currStore: any;
 
-  private storeTypeToAdd = "Rooms";
+  private storeTypeToAdd = "Room";
   constructor(private http: Http) {   }
 
 getStoreType() {
@@ -19,7 +19,7 @@ getStoreType() {
 }
 
 setStoreType() {
-  this.storeTypeToAdd = "Storages";
+  this.storeTypeToAdd = "Storage";
   return this.storeTypeToAdd;
 }
 

@@ -16,7 +16,6 @@ import {SpaceModel} from './space.model';
   selector: 'store-list',
   template: `
     <section class="listContainer">
-      <h2>{{listName}}</h2>
       <div *ngFor="let store of stores" (click)="storeSelected(store)" class="spaceCard btn btn-primary"  >
       <!--<div *ngFor="let store of stores"  class="spaceCard btn btn-primary"  >-->
         {{store.name}}
@@ -37,18 +36,18 @@ export class StoreListComponent implements OnInit {
   private stores: any;
   // private selectedSpace : SpaceModel;
   public selected = new EventEmitter();
-  private listName = this.spaceService.getStoreType();
 
   constructor(private toastr : ToastsManager,  private spaceService: SpaceService) {}
 
   ngOnInit() {
+
   }
 
   storeSelected (store) {
     console.log('store', store);
     this.selected.emit(store); 
-
-    this.listName = 'Storages';   
+    
+    this.spaceService.setStoreType();
   }
 
 
