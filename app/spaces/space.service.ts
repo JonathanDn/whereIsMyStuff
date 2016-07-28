@@ -9,8 +9,19 @@ export class SpaceService {
 
   private baseUrl = 'http://localhost:3003/data/space/';
   private space: any;
+  private currStore: any;
   constructor(private http: Http) {   }
 
+
+
+getCurrStore() {
+  return this.currStore;
+}
+setCurrStore(store) {
+  if (store) this.currStore = store;
+  else this.currStore = this.space;
+  return this.currStore;
+}
   
   // get (GETs a single)
   get(id: string) : Promise<SpaceModel> {
@@ -19,6 +30,7 @@ export class SpaceService {
       .then(res => {
         const jsonSpace = res.json();
         this.space = new SpaceModel(jsonSpace._id, jsonSpace.name, jsonSpace.stores);
+        this.currStore = this.space;
         return this.space;
       });
 
@@ -82,10 +94,12 @@ export class SpaceService {
     // push the new ROOM to the space object
     // console.log('this.space', this.space);
     
-    let house = this.space.stores.push(storeData);
+    this.currStore.stores.push(storeData);
     // console.log('house with new room: ', house);
     // console.log('house id:', id)
 
+
+    // the url and data stays the same even when inside room.
     const url = this.baseUrl + this.space._id;
     response = this.http.put(url, this.space)
 

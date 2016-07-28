@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, REACTIVE_FORM_DIRECTIVES, FormControl} from '@angular/forms';
 import {SpaceService} from './space.service';
@@ -19,7 +20,8 @@ export class SpaceEditComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private spaceService: SpaceService) { }
+    private spaceService: SpaceService, 
+    private location: Location) { }
 
   ngOnInit() {
     // console.log('this.route.params', this.route.params);
@@ -53,6 +55,7 @@ export class SpaceEditComponent implements OnInit {
     this.spaceService.save(this.frmSpace.value, spaceId)
       .then(()=>{
           this.router.navigate(['']);
+          // this.router.parent.navigate(['../', {store: this.frmSpace.value.name}]);
       });
 
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {SpaceService} from './space.service';
 import {SpaceModel} from './space.model';
 
@@ -14,7 +14,8 @@ import {StoreDiagramComponent} from './store-diagram.component'
   directives: [StoreListComponent, StoreDiagramComponent],
   template: `
     <section class="mainViewSection" *ngIf="space">
-      <!--<h2>Space {{space.name}}</h2>-->
+      <button (click)="setStore()"  >Go Home</button>
+      <h2>Space {{space.name}}</h2>
       <div class="primarySpaceContainer">
         <div class="spacesSideBar">
             
@@ -22,7 +23,7 @@ import {StoreDiagramComponent} from './store-diagram.component'
               <store-list [stores]="space.stores" (selected)="setStore($event)"  >the list Should render here</store-list>
             </div>
 
-          <a routerLink="/edit" class="addSpaceBtn btn btn-primary">+ Add Store</a>
+          <a routerLink="/edit" class="addSpaceBtn btn btn-primary">+ Add {{storeTypeToAdd}}</a>
         </div>
 
         <div class="storesPrimaryContainer">
@@ -42,9 +43,10 @@ export class SpaceComponent implements OnInit {
 
 // Input()
   private space : SpaceModel;
+  private storeTypeToAdd = 'Room';
   // private furnitures: any; 
   constructor(
-                private route: ActivatedRoute,
+                private route: ActivatedRoute, private router: Router,
                 private spaceService : SpaceService
   ) { 
 
@@ -54,24 +56,29 @@ export class SpaceComponent implements OnInit {
 
   ngOnInit() {
    
-   this.route.params.subscribe(params => {
-     console.log('Params are: ', params);
-    //  const id = params['id'];
-     const id = '5797787f2ecc9326143177f0';
-     const prmSpace = this.spaceService.get(id);
-     prmSpace.then((space: SpaceModel) => {
-       
-       this.space = space;
+  // let storeName = this.router.routerState.snapshot.queryParams["store"];
+  // console.log('Store Name is ', storeName);
+    
+    this.space = this.spaceService.getCurrStore();
 
+     if (!this.space) {
+          const id = '5797787f2ecc9326143177f0';
+          const prmSpace = this.spaceService.get(id);
+          prmSpace.then((space: SpaceModel) => {
+            this.space = space;
+        });
 
-     });
-   });
+     }
+
+     
   }
   setStore(store) {
     // console.log('store', store);
 
     // if this func is on, render the furnitures not rooms.
-    this.space =  store;
-  }
+    this.space =  this.spaceService.setCurrStore(store)
+    // change button name to add furnitures
 
+    this.storeTypeToAdd = "Storage";
+  }
 }
