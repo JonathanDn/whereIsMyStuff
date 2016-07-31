@@ -15,6 +15,7 @@
     'socket.io-parser':           'node_modules/socket.io-parser/index.js',
     'ng2-file-upload':            'node_modules/ng2-file-upload'  
   };
+  
 
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {

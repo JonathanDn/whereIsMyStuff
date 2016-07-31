@@ -29,7 +29,7 @@ import {StoreDiagramComponent} from './store-diagram.component'
 
         <div class="storesPrimaryContainer">
           <!--<space-details>The Full Space Details</space-details>-->
-          <!--<store-diagram [selected]="showSelectedRoom()">The diagram should render here</store-diagram>-->
+          <store-diagram >The diagram should render here</store-diagram>
         </div>
 
       </div>

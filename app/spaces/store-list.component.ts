@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChildren, Output, EventEmitter } from '@angular/core';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 import {SpaceService} from './space.service';
 import {SpaceModel} from './space.model';
@@ -17,11 +19,9 @@ import {SpaceModel} from './space.model';
   template: `
     <section class="listContainer">
       <div *ngFor="let store of stores" (click)="storeSelected(store)" class="spaceCard btn btn-primary"  >
-      <!--<div *ngFor="let store of stores"  class="spaceCard btn btn-primary"  >-->
         {{store.name}}
-          <!--<a  [routerLink]="['/space', {store: store.name}]" >{{store.name}}</a>-->
-          <!--<a  [routerLink]="['']"  [queryParams]="{store: store.name}">{{store.name}}</a>-->
           
+    <button (click)="delete(store)" class="btn btn-primary">  <span class="glyphicon glyphicon-trash"></span></button>
       </div>
 
     </section>
@@ -37,7 +37,7 @@ export class StoreListComponent implements OnInit {
   // private selectedSpace : SpaceModel;
   public selected = new EventEmitter();
 
-  constructor(private toastr : ToastsManager,  private spaceService: SpaceService) {}
+  constructor(private toastr : ToastsManager,  private spaceService: SpaceService, private router: Router) {}
 
   ngOnInit() {
 
@@ -50,6 +50,20 @@ export class StoreListComponent implements OnInit {
     this.spaceService.setStoreType();
   }
 
+  //needs to be done in service
+  delete(store){
+    event.stopImmediatePropagation();
+    this.spaceService.delete(store.name)
+      .then((res)=>{
+          console.log('my House after deletion: ',res);
+          this.router.navigate(['']);
+      });
+
+
+    // this.spaceService.delete(store.name);
+    // console.log('deleted',store);s
+    
+  }
 
   // removeSpace(spaceId : string) {
   //   this.spaceService.remove(spaceId)
