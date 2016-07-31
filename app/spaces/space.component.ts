@@ -29,7 +29,7 @@ import {StoreDiagramComponent} from './store-diagram.component'
 
         <div class="storesPrimaryContainer">
           <!--<space-details>The Full Space Details</space-details>-->
-          <store-diagram >The diagram should render here</store-diagram>
+          <store-diagram [stores]="space.stores" >The diagram should render here</store-diagram>
         </div>
 
       </div>
@@ -84,6 +84,7 @@ export class SpaceComponent implements OnInit {
     // change button name to add furnitures
       this.storeTypeToAdd = "Storage";
     // this.storeTypeToAdd = this.spaceService.getStoreType();
+    this.spaceService.setStoreType();
 
   }
   renderStoreType() {

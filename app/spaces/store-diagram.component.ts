@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {SpaceModel} from './space.model';
+
 import {SpaceComponent} from './space.component'
+import {SpaceModel} from './space.model';
 import {SpaceService} from './space.service'
 
 @Component({
   moduleId: module.id,
   selector: 'store-diagram',
+  inputs: ['stores'],
   styleUrls: [`space.css`],
   template: `
           <section>
@@ -21,17 +23,19 @@ import {SpaceService} from './space.service'
 })
 export class StoreDiagramComponent implements OnInit {
 
-  private stores : SpaceModel;
-  private space: any;
+  private stores : any;
+  // private space: any;
   constructor( private spaceService: SpaceService) { 
-    this.space = this.spaceService.getSpace();
-    // console.log('this.space in store:', this.space);
+    // this.space = this.spaceService.getSpace();
+    // // console.log('this.space in store:', this.space);
     
-    this.stores = this.space.stores
+    // this.stores = this.space.stores;
     // console.log('this.stores ', this.stores );
     
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    console.log('stores in Diagram:',this.stores);
+  }
 
 }
