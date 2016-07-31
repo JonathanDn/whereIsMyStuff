@@ -9,7 +9,7 @@ import {StoreDiagramComponent} from './store-diagram.component'
 
 @Component({
   moduleId: module.id,
-  styleUrls: [`space.css`],
+  //styleUrls: [`scss/css/main.css`],
   selector: 'space-comp',
   directives: [StoreListComponent, StoreDiagramComponent],
   template: `
