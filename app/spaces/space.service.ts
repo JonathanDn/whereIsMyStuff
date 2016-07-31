@@ -59,46 +59,26 @@ setCurrStore(store) {
     //get the main obj find the name of storage you want to delete save it and sends it back, the whole tree!!
     //tree search in order???
     let que = this.query().then((res) => {
-        // while (res.stores.length > 0) this.delete(name);
-        console.log('name of room to delete is: ',name);
-        console.log('deleted  ,  que is: ',res);
-        console.log('stores rooms before: ',res.stores);
-        
-        let res2 = res.stores.filter((store) => {
-          console.log('store: ',store);
+        let newStores = res.stores.filter((store) => {
+          // console.log('store: ',store);
           return store.name !== name;
         });
-        
-        console.log('deleted  ,  que2 is: ',res2);
         res.stores = [];
-        res.stores = res2;
-        return res;
+        res.stores = newStores;
+    let response : any;
+    let prmSpace : Promise<SpaceModel>;
+    const url = this.baseUrl + this.space._id;
+    // console.log('this.space',this.space);
+    // console.log('this.space res',res);
+    response = this.http.put(url, res)
+    prmSpace = response.toPromise()
+      .then((res : any) => {
+          const jsonSpace = res.json();
+          return new SpaceModel(jsonSpace._id, jsonSpace.name, jsonSpace.stores);
+      });
+    return prmSpace;
     });
-        console.log('deleted  ,  que2 is: ',que);
-      //   this.remove('5797787f2ecc9326143177f0')
-      //   .then(() =>{
-      //     this.save(que,'5797787f2ecc9326143177f0')
-
-      //     .then(()=>{
-      //           this.router.navigate(['']);
-
-      //   })
-      // });
-        
     return que;
-
-    // let response : any;
-    // let prmSpace : Promise<SpaceModel>;
-    // const url = this.baseUrl + this.space._id;
-    // // change this.space to que??
-    // response = this.http.put(url, this.space)
-
-    // prmSpace = response.toPromise()
-    //   .then((res : any) => {
-    //       const jsonSpace = res.json();
-    //       return new SpaceModel(jsonSpace._id, jsonSpace.name, jsonSpace.stores);
-    //   });
-    // return prmSpace;
   }
 
   // query brings a nice regular space object.
