@@ -10,7 +10,7 @@ import {SpaceModel} from './space.model';
 
 @Component({
   moduleId: module.id,
-  styleUrls: [`space.css`],
+  //styleUrls: [`scss/css/main.css`],
   pipes: [],
   inputs: ['stores'],
   outputs: ['selected'],
@@ -20,8 +20,7 @@ import {SpaceModel} from './space.model';
     <section class="listContainer">
       <div *ngFor="let store of stores" (click)="storeSelected(store)" class="spaceCard btn btn-primary"  >
         {{store.name}}
-          
-    <button (click)="delete(store)" class="btn btn-primary">  <span class="glyphicon glyphicon-trash"></span></button>
+        <button (click)="delete(store)" class="btn btn-primary">  <span class="glyphicon glyphicon-trash"></span></button>
       </div>
 
     </section>

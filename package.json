@@ -17,7 +17,7 @@
     "tsc:w": "tsc -w",
     "typings": "typings",
     "webdriver:update": "webdriver-manager update",
-    "build-css": "node-sass scss/main.scss public/css/styles.css",
+    "build-css": "node-sass app/scss/main.scss public/css/main.css",
     "watch-css": "nodemon -e scss -x \"npm run build-css\""
   },
   "keywords": [],

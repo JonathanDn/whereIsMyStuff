@@ -11,7 +11,7 @@ import {ItemsListComponent} from './items-list.component';
 
 @Component({
   moduleId: module.id,
-  styleUrls: [`space.css`],
+  //styleUrls: [`scss/css/main.css`],
   selector: 'space-comp',
   directives: [StoreListComponent, StoreDiagramComponent,ItemsListComponent],
   template: `

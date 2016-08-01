@@ -8,12 +8,14 @@ import {SpaceService} from './space.service'
   moduleId: module.id,
   selector: 'store-diagram',
   inputs: ['stores'],
-  styleUrls: [`space.css`],
+  //styleUrls: [`scss/css/main.css`],
   template: `
           <section>
             <h2>Diagram</h2>
             <div class="storeContainer">
-              <div class="store" *ngFor="let store of stores ">{{store.name}}</div>
+              <div class="store" *ngFor="let store of stores ">
+                <div class="storeDiagramCardName">{{store.name}}</div>
+              </div>
             </div>
             <!--<a routerLink="/space/{{space.id}}/{{space.name}}">-->
 

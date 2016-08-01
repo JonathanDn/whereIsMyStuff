@@ -1,0 +1,100 @@
+/*$bgColor : lightblue;*/
+
+/*.mainViewSection {
+ margin-top: 100px;
+
+}*/
+
+/*li {
+  list-style: none;
+  display:inline-block;
+  height: 15%;
+  width:  90%;
+  background-color:#e6eef1;
+  border-radius: 0.2em;
+  text-align: center;
+  font-size: 1em;
+  color:darkblue;
+}*/
+
+
+/*.imgMonster {
+  max-width: 100px;
+}*/
+
+
+
+.primarySpaceContainer {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid green;
+  border-radius: 5px;
+  .spacesSideBar {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    // height: 70vh;
+    .spaceCardContainer {
+      display: flex;
+      flex-direction: column;
+      /*justify-content: space-around;*/
+      .listContainer {
+      border: 3px solid yellow;
+      width: 270px;
+      // height: 350px;
+ 
+      display: flex;
+      flex-direction: column;
+      // justify-content: space-around;
+      .spaceCard {
+        display: flex;
+        // justify-content: center;
+        /*align-content: center;*/
+        width: 200px;
+        // margin: auto;
+        }
+      }
+    }
+    .addSpaceBtn {
+      margin-top: 1vw;
+      width: 200px;
+      margin: auto;
+    }
+  }
+}
+
+.storesPrimaryContainer {
+  display: flex;
+  justify-content: center;
+  border: 1px solid pink;
+  width: 800px;
+}
+
+.storeContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  border: 2px solid blue;
+  border-radius: 5px;
+  width: 300px;
+  height: 300px;
+  .store {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    .storeDiagramCardName {
+      border: 1px solid black;
+      border-top-left-radius: 5px;
+    }
+  }
+}
+
+
+
