@@ -23,7 +23,7 @@ import {ItemsListComponent} from './items-list.component';
             <h2>{{storeTypeToAdd}}s</h2>
             <div class="spaceCardContainer">
               <store-list *ngIf="!space.items" [stores]="space.stores" (selected)="setStore($event)" (deleteStore)="delete($event)" >the list Should render here</store-list>
-              <items-list *ngIf="!space.stores" [items]="space.items"></items-list>
+              <items-list *ngIf="!space.stores" [items]="space.items" (deleteStore)="delete($event)"></items-list>
               
             </div>
 
