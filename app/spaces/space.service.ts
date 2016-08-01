@@ -56,13 +56,17 @@ setCurrStore(store) {
   }
 
   delete(name: string): Promise<SpaceModel> {
-    // console.log('this.currentStore',this.currStore);
-    // console.log('name is: ',name);
+    console.log('this.currentStore',this.currStore);
+    console.log('name is: ',name);
     
     if (this.currStore.stores) {
       this.currStore.stores = this.currStore.stores.filter((store) => {
         return store.name !== name
       })
+    } else if (this.currStore.items) {
+        this.currStore.items = this.currStore.items.filter((item) => {
+        return item.name !== name
+    })
     }
     // console.log('this.currentStore after',this.currStore);
     let response : any;

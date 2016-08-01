@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import {SpaceService} from './space.service';
 import {SpaceModel} from './space.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+
+
+
 
 @Component({
   moduleId: module.id,
@@ -26,7 +31,17 @@ export class ItemsListComponent  {
 
     private items : any ; 
 
-  constructor(SpaceService : SpaceService) { }
+  constructor (private toastr : ToastsManager,  private spaceService: SpaceService, private router: Router) { }
 
-
+  delete(item){
+    event.stopImmediatePropagation();
+    // console.log('store for deletion: ',store);
+    
+    this.spaceService.delete(item.name)
+      .then((res)=>{
+          // console.log('my House after deletion: ',res);
+          // console.log('query is: ',res);
+          this.router.navigate(['']);
+      });
+  }
 }
