@@ -22,7 +22,7 @@ import {ItemsListComponent} from './items-list.component';
         <div class="spacesSideBar">
             <h2>{{storeTypeToAdd}}s</h2>
             <div class="spaceCardContainer">
-              <store-list *ngIf="!space.items" [stores]="space.stores" (selected)="setStore($event)"  >the list Should render here</store-list>
+              <store-list *ngIf="!space.items" [stores]="space.stores" (selected)="setStore($event)" (deleteStore)="delete($event)" >the list Should render here</store-list>
               <items-list *ngIf="!space.stores" [items]="space.items"></items-list>
               
             </div>
@@ -65,16 +65,33 @@ export class SpaceComponent implements OnInit {
         });
      }
   }
+
+  
   setStore(store) {
     this.space =  this.spaceService.setCurrStore(store)
     this.storeTypeToAdd = "Storage";
     this.spaceService.setStoreType();
   }
+
   renderStoreType() {
     this.storeTypeToAdd = this.spaceService.setStoreType();
     this.router.navigate(['/edit']);
   }
   addItem() {
     this.router.navigate(['/edit-item']);
+  }
+
+   delete(store) {
+    // event.stopPropagation();
+    // console.log('event is :', event);
+    
+    console.log('store for deletion: ',store);
+    
+    this.spaceService.delete(store.name)
+      .then((res)=>{
+          // console.log('my House after deletion: ',res);
+          // console.log('query is: ',res);
+          this.router.navigate(['']);
+      });
   }
 }
