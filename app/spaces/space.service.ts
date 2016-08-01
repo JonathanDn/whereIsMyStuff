@@ -63,10 +63,16 @@ setCurrStore(store) {
       this.currStore.stores = this.currStore.stores.filter((store) => {
         return store.name !== name
       })
+       if ( this.currStore.stores.length === 0){
+        delete this.currStore.stores
+      }
     } else if (this.currStore.items) {
         this.currStore.items = this.currStore.items.filter((item) => {
         return item.name !== name
     })
+      if ( this.currStore.items.length === 0){
+        delete this.currStore.items
+      }
     }
     // console.log('this.currentStore after',this.currStore);
     let response : any;
