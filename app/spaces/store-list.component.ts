@@ -40,12 +40,12 @@ export class StoreListComponent implements OnInit {
   constructor(private toastr : ToastsManager,  private spaceService: SpaceService, private router: Router) {}
 
   ngOnInit() {
-    console.log('stores in list:',this.stores);
+    // console.log('stores in list:',this.stores);
     
   }
 
   storeSelected (store) {
-    console.log('store', store);
+    // console.log('store', store);
     this.selected.emit(store); 
     
     // this.spaceService.setStoreType();

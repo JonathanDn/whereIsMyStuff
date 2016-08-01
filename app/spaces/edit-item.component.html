@@ -1,0 +1,24 @@
+<h1>Add a Item To the Storage</h1>
+<form [formGroup]="frmSpace" (submit)="save()" >
+  <div class="form-group">
+    <label>Name:</label>
+    <input type="text" class="form-control" formControlName="name" autofocus>
+    <p class="text-danger" *ngIf="frmSpace.controls.name.dirty && frmSpace.controls.name.errors?.required">Space has no name</p>
+    <p class="text-danger" *ngIf="frmSpace.controls.name.dirty && frmSpace.controls.name.errors?.minlength">Space's name too short</p>
+    <p class="text-danger" *ngIf="frmSpace.controls.name.dirty && frmSpace.controls.name.errors?.maxlength">Space's name too long</p>
+  </div>
+
+  <!--<div class="form-group">
+    <label>Power:</label>
+    <input type="number" class="form-control" formControlName="power">
+    <p class="text-danger" *ngIf="frmSpace.controls.power.dirty && frmSpace.controls.power?.errors">Space needs Power</p>
+  </div>-->
+
+  <button type="submit" [disabled]="!frmSpace.valid" class="btn btn-default">Submit</button>
+</form>
+<!--<pre>
+{{spaceToEdit | json}}
+
+</pre>-->
+
+<!--<upload-demo></upload-demo>-->

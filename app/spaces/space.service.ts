@@ -124,46 +124,35 @@ setCurrStore(store) {
   }
 
   // save - Adds (POST) or update (PUT)  
-  save(storeData: any, id?: string) : Promise<SpaceModel>{
-    // console.log('storeData before', storeData);
-    // add property stores array
-    storeData.stores = [];
-    // console.log('storeData after', storeData);    
+  save(storeData: any,addWhat? : string, id?: string) : Promise<SpaceModel>{
+    if (addWhat === 'stores'){
+ if ( !this.currStore.stores)   this.currStore.stores = [];
+      this.currStore.stores.push(storeData);
+
+    }else {
+      //  delete this.currStore.stores;
+      if ( !this.currStore.items)   this.currStore.items = [];
+       this.currStore.items.push(storeData);
+       
+    }
     let response : any;
     let prmSpace : Promise<SpaceModel>;
-    // push the new ROOM to the space object
-    // console.log('this.space', this.space);
+    console.log('currStore',this.currStore);
     
-    this.currStore.stores.push(storeData);
-    // console.log('house with new room: ', house);
-    // console.log('house id:', id)
-
-
-    // the url and data stays the same even when inside room.
+    console.log('storeData',storeData);
+    console.log('space',this.space);
+    
+      //  alert('storeData');
     const url = this.baseUrl + this.space._id;
     response = this.http.put(url, this.space)
-
-    // if (id) {
-    //   const url = this.baseUrl + id;
-    //   response = this.http.put(url, house)
-    // } else {
-    //   // succefully saves NEW ROOM to database.
-	  //   const url = this.baseUrl;
-    //   response = this.http.post(url, house)
-    //   // console.log('response from url:', response);
-    // }
-
     prmSpace = response.toPromise()
       .then((res : any) => {
           const jsonSpace = res.json();
-          // console.log('jsonSpace', jsonSpace);
-          // update the client space array.
-          // this.stores.push(jsonSpace);
-          // console.log('this.stores with new store in space:', this.space);
-          
+          console.log('space',this.space);
+          console.log('res',res);
+          //////////////////////////////////////////////////////////////TODO: remove json.stores ?? when
           return new SpaceModel(jsonSpace._id, jsonSpace.name, jsonSpace.stores);
       });
-
     prmSpace.catch(err => {
       console.log('SpaceService::save - Problem talking to server', err);
     });

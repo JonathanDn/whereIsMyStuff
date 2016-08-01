@@ -35,7 +35,7 @@ export class StoreDiagramComponent implements OnInit {
   }
 
   ngOnInit() { 
-    console.log('stores in Diagram:',this.stores);
+    // console.log('stores in Diagram:',this.stores);
   }
 
 }

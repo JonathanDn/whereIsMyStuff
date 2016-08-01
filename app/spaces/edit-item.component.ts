@@ -9,10 +9,10 @@ import {UploadDemoComponent} from '../shared/upload-demo/upload-demo.component'
 @Component({
   moduleId: module.id,
   // selector: 'space-edit',
-  templateUrl: 'space-edit.component.html',
+  templateUrl: 'edit-item.component.html',
   directives: [REACTIVE_FORM_DIRECTIVES, UploadDemoComponent]
 })
-export class SpaceEditComponent implements OnInit {
+export class EditItemComponent implements OnInit {
 
   private frmSpace: FormGroup;
   private spaceToEdit: SpaceModel;
@@ -44,19 +44,14 @@ export class SpaceEditComponent implements OnInit {
       });
   }
   save() {
+      
+    console.log('daniel clicked add 1');
     const spaceId = (this.spaceToEdit)?  this.spaceToEdit.id : undefined;
     console.log('this.frmSpace.value', this.frmSpace.value);
     this.spaceService.setStoreType();
-    // this.frmSpace.spaces = []
-    // console.log('spaceId:', spaceId);
-    
-    // console.log('here');
-
-    // succefuly saving to spaces array in DB
-    this.spaceService.save(this.frmSpace.value,'stores', spaceId)
+    this.spaceService.save(this.frmSpace.value,'items', spaceId)
       .then(()=>{
           this.router.navigate(['']);
-          // this.router.parent.navigate(['../', {store: this.frmSpace.value.name}]);
       });
 
   }
@@ -67,7 +62,6 @@ export class SpaceEditComponent implements OnInit {
               Validators.compose([Validators.required,
                                   Validators.minLength(3),
                                   Validators.maxLength(100)])],
-      // power: [5, Validators.required]
     });
   }
 }

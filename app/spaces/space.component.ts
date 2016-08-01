@@ -3,28 +3,33 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {SpaceService} from './space.service';
 import {SpaceModel} from './space.model';
 
-import {StoreListComponent} from './store-list.component'
-import {StoreDiagramComponent} from './store-diagram.component'
+import {StoreListComponent} from './store-list.component';
+import {StoreDiagramComponent} from './store-diagram.component';
+import {ItemsListComponent} from './items-list.component';
+
 
 
 @Component({
   moduleId: module.id,
   styleUrls: [`space.css`],
   selector: 'space-comp',
-  directives: [StoreListComponent, StoreDiagramComponent],
+  directives: [StoreListComponent, StoreDiagramComponent,ItemsListComponent],
   template: `
     <section class="mainViewSection" *ngIf="space">
-      <button (click)="setStore()"  >Go Home</button>
+      <button (click)="setStore()">Go Home</button>
       <h2>Space {{space.name}}</h2>
       <div class="primarySpaceContainer">
         <div class="spacesSideBar">
             <h2>{{storeTypeToAdd}}s</h2>
             <div class="spaceCardContainer">
-              <store-list [stores]="space.stores" (selected)="setStore($event)"  >the list Should render here</store-list>
+              <store-list *ngIf="!space.items" [stores]="space.stores" (selected)="setStore($event)"  >the list Should render here</store-list>
+              <items-list *ngIf="!space.stores" [items]="space.items"></items-list>
+              
             </div>
 
-          <!--<a routerLink="/edit" class="addSpaceBtn btn btn-primary">+ Add {{storeTypeToAdd}}</a>-->
-          <div (click)="renderStoreType()" class="addSpaceBtn btn btn-primary">+ Add {{storeTypeToAdd}}</div>
+          <div *ngIf="!space.items" (click)="renderStoreType()" class="addSpaceBtn btn btn-primary">+ Add {{storeTypeToAdd}}</div>
+          <div  *ngIf="!space.stores" (click)="addItem()" class="addSpaceBtn btn btn-primary">+ Add items</div>
+          
         </div>
 
         <div class="storesPrimaryContainer">
@@ -45,6 +50,7 @@ export class SpaceComponent implements OnInit {
 // Input()
   private space : SpaceModel;
   private storeTypeToAdd;
+  // private t;
   // private furnitures: any; 
   constructor(
                 private route: ActivatedRoute, private router: Router,
@@ -56,7 +62,7 @@ export class SpaceComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+  //  this.t = true;
   // let storeName = this.router.routerState.snapshot.queryParams["store"];
   // console.log('Store Name is ', storeName);
     this.storeTypeToAdd = this.spaceService.getStoreType();
@@ -75,7 +81,7 @@ export class SpaceComponent implements OnInit {
      
   }
   setStore(store) {
-    console.log('setStoring!!!');
+    // console.log('setStoring!!!');
     
     // console.log('spaceComponent: store', store);
     
@@ -97,5 +103,12 @@ export class SpaceComponent implements OnInit {
     this.router.navigate(['/edit']);
     
     
+  }
+
+  addItem() {
+    
+    this.router.navigate(['/edit-item']);
+
+
   }
 }

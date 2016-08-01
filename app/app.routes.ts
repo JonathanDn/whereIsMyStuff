@@ -5,6 +5,8 @@ import {StoreDiagramComponent} from './spaces/store-diagram.component';
 import {StoreListComponent} from './spaces/store-list.component';
 import {SpaceComponent} from './spaces/space.component';
 import {SpaceEditComponent} from './spaces/space-edit.component';
+import {EditItemComponent} from './spaces/edit-item.component';
+
 // import {ChatRoomComponent} from './chat/chat-room.component';
 import { RouterConfig, ROUTER_DIRECTIVES, provideRouter } from '@angular/router';
 
@@ -14,6 +16,7 @@ const routes: RouterConfig = [
   
   // { path: 'space', component: StoreListComponent },
   { path: 'edit', component: SpaceEditComponent },
+  { path: 'edit-item', component: EditItemComponent },
   { path: 'edit/:id', component: SpaceEditComponent }
   
   // { path: 'space/:id/:name', component: SpaceComponent },
