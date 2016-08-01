@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import {SpaceService} from './space.service';
 import {SpaceModel} from './space.model';
-// import {SpaceComponent} from './space.component';
 
 
 @Component({
@@ -39,15 +38,10 @@ export class StoreListComponent implements OnInit {
   constructor(private toastr : ToastsManager,  private spaceService: SpaceService, private router: Router) {}
 
   ngOnInit() {
-    // console.log('stores in list:',this.stores);
-    
   }
 
   storeSelected (store) {
-    // console.log('store', store);
     this.selected.emit(store); 
-    
-    // this.spaceService.setStoreType();
   }
 
   //needs to be done in service
@@ -58,24 +52,5 @@ export class StoreListComponent implements OnInit {
           console.log('my House after deletion: ',res);
           this.router.navigate(['']);
       });
-
-
-    // this.spaceService.delete(store.name);
-    // console.log('deleted',store);s
-    
   }
-
-  // removeSpace(spaceId : string) {
-  //   this.spaceService.remove(spaceId)
-  //     .then((space : SpaceModel)=>{
-  //       this.space = space;
-  //       this.toastr.success('You are awesome!', 'Success!');
-  //     });
-  // }
-
-  // onSelect(space){
-  //   // console.log('space here')
-  //   this.selectedSpace = space;
-  //   // console.log('this.selectedSpace.name', this.selectedSpace.name);
-  // }
 }

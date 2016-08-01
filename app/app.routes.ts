@@ -12,16 +12,9 @@ import { RouterConfig, ROUTER_DIRECTIVES, provideRouter } from '@angular/router'
 
 const routes: RouterConfig = [
   { path: '', component: SpaceComponent },
-  // { path: 'store/:storeName', component: SpaceComponent },
-  
-  // { path: 'space', component: StoreListComponent },
   { path: 'edit', component: SpaceEditComponent },
   { path: 'edit-item', component: EditItemComponent },
   { path: 'edit/:id', component: SpaceEditComponent }
-  
-  // { path: 'space/:id/:name', component: SpaceComponent },
-  // { path: 'chat', component: ChatRoomComponent }
-
 ];
 
 export const ROUTER_PROVIDERS = [

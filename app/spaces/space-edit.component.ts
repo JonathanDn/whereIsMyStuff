@@ -8,7 +8,6 @@ import {UploadDemoComponent} from '../shared/upload-demo/upload-demo.component'
 
 @Component({
   moduleId: module.id,
-  // selector: 'space-edit',
   templateUrl: 'space-edit.component.html',
   directives: [REACTIVE_FORM_DIRECTIVES, UploadDemoComponent]
 })
@@ -24,11 +23,9 @@ export class SpaceEditComponent implements OnInit {
     private location: Location) { }
 
   ngOnInit() {
-    // console.log('this.route.params', this.route.params);
     this.prepareForm();
     this.route.params.subscribe(params => {
         const id = params['id'];
-        // This means EDIT mode
         if (id) {
           this.spaceService.get(id)
             .then((space) =>{
@@ -38,27 +35,18 @@ export class SpaceEditComponent implements OnInit {
                 (<FormControl>this.frmSpace.controls['name']).updateValue(space.name);          
             });
         } 
-        // else {
-        //   this.spaceToEdit = new SpaceModel();
-        // }
+       
       });
   }
   save() {
     const spaceId = (this.spaceToEdit)?  this.spaceToEdit.id : undefined;
     console.log('this.frmSpace.value', this.frmSpace.value);
     this.spaceService.setStoreType();
-    // this.frmSpace.spaces = []
-    // console.log('spaceId:', spaceId);
-    
-    // console.log('here');
-
-    // succefuly saving to spaces array in DB
+   
     this.spaceService.save(this.frmSpace.value,'stores', spaceId)
       .then(()=>{
           this.router.navigate(['']);
-          // this.router.parent.navigate(['../', {store: this.frmSpace.value.name}]);
       });
-
   }
 
   prepareForm() {

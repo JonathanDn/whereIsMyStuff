@@ -60,7 +60,6 @@ setCurrStore(store) {
     //tree search in order???
     let que = this.query().then((res) => {
         let newStores = res.stores.filter((store) => {
-          // console.log('store: ',store);
           return store.name !== name;
         });
         res.stores = [];
@@ -68,8 +67,6 @@ setCurrStore(store) {
     let response : any;
     let prmSpace : Promise<SpaceModel>;
     const url = this.baseUrl + this.space._id;
-    // console.log('this.space',this.space);
-    // console.log('this.space res',res);
     response = this.http.put(url, res)
     prmSpace = response.toPromise()
       .then((res : any) => {
@@ -81,19 +78,12 @@ setCurrStore(store) {
     return que;
   }
 
-  // query brings a nice regular space object.
   query(): Promise<SpaceModel> {
     const id = '5797787f2ecc9326143177f0';
     let prmSpace = this.http.get(this.baseUrl  + id)
       .toPromise()
       .then((res : any) => {
-        // console.log('res is :', res);      
         const jsonSpace = res.json();
-        // console.log('jsonSpace from server:', jsonSpace);       
-
-        // const regularSpace = jsonSpace.map((jsonSpace : any) =>
-        //   new SpaceModel(jsonSpace._id, jsonSpace.name, jsonSpace.stores));
-          // console.log('regularSpace:', regularSpace);
         return jsonSpace
       });
 
@@ -115,7 +105,7 @@ setCurrStore(store) {
       .then(res => {
         
         return this.query();
-      });
+    });
 
     prmSpace.catch(err => {
       console.log('SpaceService::remove - Problem talking to server', err);
@@ -126,15 +116,14 @@ setCurrStore(store) {
   // save - Adds (POST) or update (PUT)  
   save(storeData: any,addWhat? : string, id?: string) : Promise<SpaceModel>{
     if (addWhat === 'stores'){
- if ( !this.currStore.stores)   this.currStore.stores = [];
+    if ( !this.currStore.stores)    this.currStore.stores = [];
       this.currStore.stores.push(storeData);
 
-    }else {
-      //  delete this.currStore.stores;
+    } else {
       if ( !this.currStore.items)   this.currStore.items = [];
        this.currStore.items.push(storeData);
-       
     }
+
     let response : any;
     let prmSpace : Promise<SpaceModel>;
     console.log('currStore',this.currStore);
@@ -142,7 +131,6 @@ setCurrStore(store) {
     console.log('storeData',storeData);
     console.log('space',this.space);
     
-      //  alert('storeData');
     const url = this.baseUrl + this.space._id;
     response = this.http.put(url, this.space)
     prmSpace = response.toPromise()

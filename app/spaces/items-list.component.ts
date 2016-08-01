@@ -8,7 +8,6 @@ import {SpaceModel} from './space.model';
   selector: 'items-list',
   inputs: ['items'],
 
-  // selector: 'space-edit',
   template: `
                   <section class="listContainer">
                     <div *ngFor="let item of items" (click)="storeSelected(item)" class="spaceCard btn btn-primary"  >
