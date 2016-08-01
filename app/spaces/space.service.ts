@@ -118,6 +118,9 @@ setCurrStore(store) {
     return prmSpace;
   }
 
+
+  // Daniel what did you do here?
+
   // save - Adds (POST) or update (PUT)  
   save(storeData: any,addWhat? : string, id?: string) : Promise<SpaceModel>{
     if (addWhat === 'stores'){
@@ -127,6 +130,7 @@ setCurrStore(store) {
     } else {
       if ( !this.currStore.items)   this.currStore.items = [];
        this.currStore.items.push(storeData);
+
     }
 
     let response : any;

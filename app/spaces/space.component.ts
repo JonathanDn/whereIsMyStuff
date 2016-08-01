@@ -18,23 +18,24 @@ import {ItemsListComponent} from './items-list.component';
     <section class="mainViewSection" *ngIf="space">
       <button (click)="setStore()">Go Home</button>
       <h2>Space {{space.name}}</h2>
+      <!--Test{{space.items | json}}-->
       <div class="primarySpaceContainer">
         <div class="spacesSideBar">
             <h2>{{storeTypeToAdd}}s</h2>
             <div class="spaceCardContainer">
               <store-list *ngIf="!space.items" [stores]="space.stores" (selected)="setStore($event)" (deleteStore)="delete($event)" >the list Should render here</store-list>
-              <items-list *ngIf="!space.stores" [items]="space.items" (deleteStore)="delete($event)"></items-list>
+             
               
             </div>
 
-          <div *ngIf="!space.items" (click)="renderStoreType()" class="addSpaceBtn btn btn-primary">+ Add {{storeTypeToAdd}}</div>
-          <div  *ngIf="!space.stores" (click)="addItem()" class="addSpaceBtn btn btn-primary">+ Add items</div>
+          <div *ngIf="!space.items" (click)="renderStoreType();getStorageCard()" class="addSpaceBtn btn btn-primary">+ Add {{storeTypeToAdd}}</div>
+          <div  *ngIf="!space.stores" (click)="addItem();getStorageCard()" class="addSpaceBtn btn btn-primary">+ Add items</div>
           
         </div>
 
         <div class="storesPrimaryContainer">
           <!--<space-details>The Full Space Details</space-details>-->
-          <store-diagram [stores]="space.stores" >The diagram should render here</store-diagram>
+          <store-diagram [stores]="space.stores ? space.stores : space.items" >The diagram should render here</store-diagram>
         </div>
 
       </div>
@@ -65,10 +66,14 @@ export class SpaceComponent implements OnInit {
         });
      }
   }
+  getStorageCard() {
+    // this.isImageStorage = true;
+
+  }
 
   
   setStore(store) {
-    this.space =  this.spaceService.setCurrStore(store)
+    this.space =  this.spaceService.setCurrStore(store);
     this.storeTypeToAdd = "Storage";
     this.spaceService.setStoreType();
   }
@@ -77,7 +82,10 @@ export class SpaceComponent implements OnInit {
     this.storeTypeToAdd = this.spaceService.setStoreType();
     this.router.navigate(['/edit']);
   }
+  
   addItem() {
+    // this.storeTypeToAdd = 'Item';
+    // this.storeTypeToAdd = this.spaceService.setStoreType();
     this.router.navigate(['/edit-item']);
   }
 

@@ -72,12 +72,28 @@ body {
       flex-direction: column;
       justify-content: flex-end;
       align-items: flex-end;
-      border: 1px solid black;
+      border: 1px solid darkcyan;
+      border-radius: 5px;
       width: 100px;
-      height: 100px; }
+      height: 100px;
+      background-image: url("/img/storageRoom.jpg");
+      background-size: 100px 100px; }
       .storesPrimaryContainer .storeContainer .store .storeDiagramCardName {
-        border: 1px solid black;
+        color: white;
+        background-color: darkgreen;
+        border: 1px solid seagreen;
         border-top-left-radius: 5px; }
+    .storesPrimaryContainer .storeContainer .item {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      border: 1px solid darkcyan;
+      border-radius: 5px;
+      width: 100px;
+      height: 100px;
+      background-image: url("/img/item.png");
+      background-size: 100px 100px; }
 
 /* TODO: make it SCSS */
 .container {
