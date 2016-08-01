@@ -17,4 +17,9 @@ import * as io from 'socket.io-client';
   providers: [ChatRoomService, ToastsManager, {provide: 'io', useValue: io}, SpaceService]
 
 })
-export class AppComponent { }
+export class AppComponent { 
+  foo(){
+    console.log('clicked');
+    
+  }
+}
