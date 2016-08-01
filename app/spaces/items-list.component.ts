@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
 import {SpaceService} from './space.service';
 import {SpaceModel} from './space.model';
@@ -12,7 +12,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
   moduleId: module.id,
   selector: 'items-list',
   inputs: ['items'],
-
+  outputs: ['deleteStore'],
   template: `
                   <section class="listContainer">
                     <div *ngFor="let item of items"  class="spaceCard btn btn-primary"  >
@@ -32,19 +32,13 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 export class ItemsListComponent  {
 
     private items : any ; 
-
+    private deleteStore: any = new EventEmitter();
   constructor (private toastr : ToastsManager,  private spaceService: SpaceService, private router: Router) { }
 
-  delete(item){
-    event.stopImmediatePropagation();
-    // console.log('store for deletion: ',store);
-    
-    this.spaceService.delete(item.name)
-      .then((res)=>{
-          // console.log('my House after deletion: ',res);
-          // console.log('query is: ',res);
-          this.router.navigate(['']);
-      });
+   delete(store){
+    event.stopPropagation();
+    // console.log('event is :', event);
+    this.deleteStore.emit(store);
   }
 
   update(item){
