@@ -47,9 +47,12 @@ export class StoreListComponent implements OnInit {
   //needs to be done in service
   delete(store){
     event.stopImmediatePropagation();
+    console.log('store for deletion: ',store);
+    
     this.spaceService.delete(store.name)
       .then((res)=>{
-          console.log('my House after deletion: ',res);
+          // console.log('my House after deletion: ',res);
+          // console.log('query is: ',res);
           this.router.navigate(['']);
       });
   }

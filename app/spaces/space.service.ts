@@ -55,34 +55,36 @@ setCurrStore(store) {
     return this.space;
   }
 
-  delete(name: string) : Promise<SpaceModel> {
-    //get the main obj find the name of storage you want to delete save it and sends it back, the whole tree!!
-    //tree search in order???
-    let que = this.query().then((res) => {
-        let newStores = res.stores.filter((store) => {
-          return store.name !== name;
-        });
-        res.stores = [];
-        res.stores = newStores;
+  delete(name: string): Promise<SpaceModel> {
+    // console.log('this.currentStore',this.currStore);
+    // console.log('name is: ',name);
+    
+    if (this.currStore.stores) {
+      this.currStore.stores = this.currStore.stores.filter((store) => {
+        return store.name !== name
+      })
+    }
+    // console.log('this.currentStore after',this.currStore);
     let response : any;
     let prmSpace : Promise<SpaceModel>;
     const url = this.baseUrl + this.space._id;
-    response = this.http.put(url, res)
+    response = this.http.put(url, this.space)
     prmSpace = response.toPromise()
-      .then((res : any) => {
-          const jsonSpace = res.json();
-          return new SpaceModel(jsonSpace._id, jsonSpace.name, jsonSpace.stores);
+      .then((res: any) => {
+        const jsonSpace = res.json();
+        return new SpaceModel(jsonSpace._id, jsonSpace.name, jsonSpace.stores);
       });
-    return prmSpace;
+    prmSpace.catch(err => {
+      console.log('SpaceService::save - Problem talking to server', err);
     });
-    return que;
+    return prmSpace;
   }
 
   query(): Promise<SpaceModel> {
     const id = '5797787f2ecc9326143177f0';
-    let prmSpace = this.http.get(this.baseUrl  + id)
+    let prmSpace = this.http.get(this.baseUrl + id)
       .toPromise()
-      .then((res : any) => {
+      .then((res: any) => {
         const jsonSpace = res.json();
         return jsonSpace
       });
@@ -98,7 +100,6 @@ setCurrStore(store) {
 
   // DELETE 
   remove(id: string) : Promise<SpaceModel> {
-    console.log('query',this.query());
     
     let prmSpace = this.http.delete(this.baseUrl + id)
       .toPromise()
@@ -126,18 +127,18 @@ setCurrStore(store) {
 
     let response : any;
     let prmSpace : Promise<SpaceModel>;
-    console.log('currStore',this.currStore);
+    // console.log('currStore',this.currStore);
     
-    console.log('storeData',storeData);
-    console.log('space',this.space);
+    // console.log('storeData',storeData);
+    // console.log('space',this.space);
     
     const url = this.baseUrl + this.space._id;
     response = this.http.put(url, this.space)
     prmSpace = response.toPromise()
       .then((res : any) => {
           const jsonSpace = res.json();
-          console.log('space',this.space);
-          console.log('res',res);
+          // console.log('space',this.space);
+          // console.log('res',res);
           //////////////////////////////////////////////////////////////TODO: remove json.stores ?? when
           return new SpaceModel(jsonSpace._id, jsonSpace.name, jsonSpace.stores);
       });
