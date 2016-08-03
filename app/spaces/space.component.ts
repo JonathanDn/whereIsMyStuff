@@ -19,9 +19,13 @@ import {ItemsListComponent} from './items-list.component';
       <button (click)="setStore()">Go Home</button>
       <input #term type="text"  (keyup)="search(term.value)">
         <div style="display:flex;flex-direction: row">
-          <a (click)="relocate('myHouse')" >My House / </a>
+          <!--<a (click)="relocate('myHouse')" >My House / </a>-->
+          <a  >My House / </a>
+          
           <div *ngFor="let position of positions" >
-            <a  (click)="relocate(position.name)">  {{position.name}}  /  </a>
+            <!--<a  (click)="relocate(position.name)">  {{position.name}}  /  </a>-->
+            <a  >  {{position.name}}  /  </a>
+            
         </div>
       </div>
       <div class="primarySpaceContainer">
