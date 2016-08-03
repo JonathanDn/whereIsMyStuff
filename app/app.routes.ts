@@ -7,7 +7,7 @@ import {SpaceComponent} from './spaces/space.component';
 import {SpaceEditComponent} from './spaces/space-edit.component';
 import {EditItemComponent} from './spaces/edit-item.component';
 
-// import {ChatRoomComponent} from './chat/chat-room.component';
+
 import { RouterConfig, ROUTER_DIRECTIVES, provideRouter } from '@angular/router';
 
 const routes: RouterConfig = [

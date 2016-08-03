@@ -37,6 +37,7 @@ export class EditItemComponent implements OnInit {
         } 
       });
   }
+  // maybe here I need to add the path argument?
   save() {
       
     const spaceId = (this.spaceToEdit)?  this.spaceToEdit.id : undefined;

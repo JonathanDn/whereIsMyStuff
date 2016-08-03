@@ -7,17 +7,26 @@ import {StoreListComponent} from './store-list.component';
 import {StoreDiagramComponent} from './store-diagram.component';
 import {ItemsListComponent} from './items-list.component';
 
+import {SearchComponent} from './search.component';
+
 
 
 @Component({
   moduleId: module.id,
   //styleUrls: [`scss/css/main.css`],
   selector: 'space-comp',
-  directives: [StoreListComponent, StoreDiagramComponent,ItemsListComponent],
+  directives: [StoreListComponent, StoreDiagramComponent,ItemsListComponent, SearchComponent],
   template: `
     <section class="mainViewSection" *ngIf="space">
       <button (click)="setStore()">Go Home</button>
       <h2>Space {{space.name}}</h2>
+
+      <user-search (search)="findItemFromService($event)"></user-search>
+      <!--<div>thisPath: {{getPaths() | json}}</div>-->
+      <ul>
+        <li *ngFor="let path of paths">{{path.path}}</li>
+      </ul>
+
       <!--Test{{space.items | json}}-->
       <div class="primarySpaceContainer">
         <div class="spacesSideBar">
@@ -50,12 +59,17 @@ export class SpaceComponent implements OnInit {
 
   private space : SpaceModel;
   private storeTypeToAdd;
+
+  private searchedItems: any;
+  private result: any;
+  private paths: Object[];
   constructor(
                 private route: ActivatedRoute, private router: Router,
                 private spaceService : SpaceService
-  ){} 
+                ){} 
 
   ngOnInit() {
+    // creating the initial HOUSE object
     this.storeTypeToAdd = this.spaceService.getStoreType();
     this.space = this.spaceService.getCurrStore();
      if (!this.space) {
@@ -63,15 +77,40 @@ export class SpaceComponent implements OnInit {
           const prmSpace = this.spaceService.get(id);
           prmSpace.then((space: SpaceModel) => {
             this.space = space;
+            // console.log('this.space:', this.space);
+            
         });
      }
   }
+  getPaths() {
+    this.paths;
+
+
+    return this.paths;
+  }
+
+
+
+
+  // using spaceService finding items method
+  findItemFromService(searchedValue) {
+    console.log('searchedValue in space comp', searchedValue);
+    // console.log('this.space in space comp:', this.space);
+    
+    // use service to find searched item by inputting 1) serached item value 2) the house object
+    // console.log('this.searchedItems initialzied:', this.searchedItems);
+    this.paths = this.spaceService.findItems(searchedValue, this.space);
+    // console.log('this.result:', this.paths);
+    
+    // console.log('this.searchedItems found:', this.searchedItems);
+    
+  }
+
   getStorageCard() {
     // this.isImageStorage = true;
 
   }
 
-  
   setStore(store) {
     this.space =  this.spaceService.setCurrStore(store);
     this.storeTypeToAdd = "Storage";

@@ -43,7 +43,7 @@ export class SpaceEditComponent implements OnInit {
     console.log('this.frmSpace.value', this.frmSpace.value);
     this.spaceService.setStoreType();
    
-    this.spaceService.save(this.frmSpace.value,'stores', spaceId)
+    this.spaceService.save(this.frmSpace.value, 'stores', spaceId)
       .then(()=>{
           this.router.navigate(['']);
       });

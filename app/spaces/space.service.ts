@@ -12,9 +12,42 @@ export class SpaceService {
   private baseUrl = 'http://localhost:3003/data/space/';
   private space: any;
   private currStore: any;
-
   private storeTypeToAdd = "Room";
   constructor(private http: Http,  private router: Router) {   }
+
+
+findItemsRecursive(itemToSearch, node, path = [], foundItems = []) {
+  
+    let children = node.stores || node.items;
+    
+    path.push(node.name);
+
+    if (!children) {
+      // the condition on which the algo finds matches to search
+      // if itemToSearch exists will return indexOf(a number bigger then -1)
+        if(node.name.indexOf(itemToSearch) > -1) { // AUTOCOMPLETE FINDING now in REAL time.
+        // if (node.name === itemToSearch) {
+            foundItems.push({ name : node.name, path : path.join()});
+            console.log('path when algo finish:', path);
+        }
+    }
+    else {
+        children.forEach((child) => {
+            
+            // save the found item --> in foundItems and push it to the foundItemsInStore array.
+            this.findItemsRecursive(itemToSearch, child, path, foundItems);
+            path.pop();
+            
+        });
+
+    }
+}
+
+findItems(itemToSearch, node) {
+  let result = [];
+  this.findItemsRecursive(itemToSearch, node, [], result);
+  return result;
+}
 
 getStoreType() {
   return this.storeTypeToAdd;
@@ -128,14 +161,31 @@ setCurrStore(store) {
   // Daniel what did you do here?
 
   // save - Adds (POST) or update (PUT)  
-  save(storeData: any,addWhat? : string, id?: string) : Promise<SpaceModel>{
-    if (addWhat === 'stores'){
-    if ( !this.currStore.stores)    this.currStore.stores = [];
-      this.currStore.stores.push(storeData);
+  save(storeData: any, addWhat? : string, id?: string) : Promise<SpaceModel>{
+    // console.log('storeData:', storeData);
+    // storeData.path.push(storeData.name);
+    // console.log('storeData with path before updating currStore:',storeData);
+    // const path = storeData.name;
+    // console.log('path:', path);
+    if(this.currStore.path === []) {
+      this.currStore.path = this.path;
+      console.log('this.currStore path initialize', this.currStore.path);
+    }
+    // this.currStore.path.push(this.currStore.name);
+    // console.log('this.currStore path with dataStore', this.currStore.path);
+    
 
-    } else {
-      if ( !this.currStore.items)   this.currStore.items = [];
-       this.currStore.items.push(storeData);
+    if (addWhat === 'stores'){ //STORE
+      if ( !this.currStore.stores)    this.currStore.stores = [];
+        this.currStore.stores.push(storeData);
+
+    } else { //ITEM
+      if ( !this.currStore.items)   this.currStore.items = [];     
+      // console.log('this.currStore created', this.currStore);
+      // console.log('item created');
+      // console.log('items:', this.currStore.items);
+      this.currStore.items.push(storeData);
+
 
     }
 
