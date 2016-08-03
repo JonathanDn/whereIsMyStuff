@@ -42,7 +42,7 @@ export class StoreDiagramComponent implements OnInit {
   // johnny's image rendering
   getClassOfStore (store) {
     // console.log('checking class:', store);
-    console.log('checking class:', store);
+    // console.log('checking class:', store);
     // get's the current store object --> storage / item
 
 
@@ -50,9 +50,9 @@ export class StoreDiagramComponent implements OnInit {
 
     // it's an item
     if(!store) {
-      console.log('!store - returned Store class');
+      // console.log('!store - returned Store class');
       if (store.items) {
-        console.log('returned item');
+        // console.log('returned item');
         return 'item';
       } 
     }
@@ -60,10 +60,10 @@ export class StoreDiagramComponent implements OnInit {
     else {
       // console.log('item was rendered')
        if (!store.items) {
-        console.log('store defined - returned item');
+        // console.log('store defined - returned item');
         return 'item';
       } 
-      console.log('store - returned Store class');
+      // console.log('store - returned Store class');
       return 'store';
     }
   }

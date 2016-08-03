@@ -33,6 +33,7 @@ export class StoreListComponent implements OnInit {
   // TODO: let the pipe setup the initial filter
   // private filter = {byName: '', byPower: ''};
   // private space: any;
+  
   private stores: any;
   // private selectedSpace : SpaceModel;
   public selected = new EventEmitter();
@@ -45,7 +46,7 @@ export class StoreListComponent implements OnInit {
   }
 
   storeSelected (store) {
-    console.log('here is :');
+    // console.log('here is :');
     this.selected.emit(store); 
   }
 

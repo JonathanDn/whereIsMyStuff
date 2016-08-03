@@ -17,13 +17,19 @@ import {ItemsListComponent} from './items-list.component';
   template: `
     <section class="mainViewSection" *ngIf="space">
       <button (click)="setStore()">Go Home</button>
-      <h2>Space {{space.name}}</h2>
-      <!--Test{{space.items | json}}-->
+      <input #term type="text"  (keyup)="search(term.value)">
+        <div style="display:flex;flex-direction: row">
+          <a (click)="relocate('myHouse')" >My House / </a>
+          <div *ngFor="let position of positions" >
+            <a  (click)="relocate(position.name)">  {{position.name}}  /  </a>
+        </div>
+      </div>
       <div class="primarySpaceContainer">
         <div class="spacesSideBar">
             <h2>{{storeTypeToAdd}}s</h2>
             <div class="spaceCardContainer">
               <store-list *ngIf="!space.items" [stores]="space.stores" (selected)="setStore($event)" (deleteStore)="delete($event)" >the list Should render here</store-list>
+              <store-list *ngIf="!space.stores" [stores]="space.items" (selected)="setStore($event)" (deleteStore)="delete($event)" >the list Should render here</store-list>
              
               
             </div>
@@ -34,14 +40,10 @@ import {ItemsListComponent} from './items-list.component';
         </div>
 
         <div class="storesPrimaryContainer">
-          <!--<space-details>The Full Space Details</space-details>-->
           <store-diagram [stores]="space.stores ? space.stores : space.items" >The diagram should render here</store-diagram>
         </div>
 
       </div>
-      <!--<pre>
-          {{space | json}}
-        </pre>-->
 
     </section>
   `
@@ -50,6 +52,8 @@ export class SpaceComponent implements OnInit {
 
   private space : SpaceModel;
   private storeTypeToAdd;
+  private positions = [];
+  
   constructor(
                 private route: ActivatedRoute, private router: Router,
                 private spaceService : SpaceService
@@ -73,6 +77,14 @@ export class SpaceComponent implements OnInit {
 
   
   setStore(store) {
+    if (!store){
+      this.positions = [];
+
+    } else {
+      this.positions.push(store);
+      console.log('ur location is :',this.positions);
+
+    }
     this.space =  this.spaceService.setCurrStore(store);
     this.storeTypeToAdd = "Storage";
     this.spaceService.setStoreType();
@@ -101,5 +113,30 @@ export class SpaceComponent implements OnInit {
           // console.log('query is: ',res);
           this.router.navigate(['']);
       });
+  }
+
+  search(value){
+    console.log('search is :', value);
+    let tree = this.spaceService.query().then((res)=> {
+      console.log('tree is :', res);
+
+    })
+    
+    
+  }
+  relocate(location){
+    console.log('clicked', location);
+    let reLocation = this.spaceService.query().then((space)=>{
+      //only works for rooms
+        let newStore = space.stores.filter((store)=>{
+            console.log('store is', store);
+            return store.name === location
+        })
+        console.log('newStore is :',newStore[0].stores);
+        this.space.stores = newStore[0].stores;
+        
+    })
+    
+    
   }
 }
